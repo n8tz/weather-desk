@@ -19,6 +19,9 @@ import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget
 import Widget                               from 'App/ui/containers/Widget.js';
 import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
 
+import Fab        from '@material-ui/core/Fab';
+import CreateIcon from '@material-ui/icons/Create';
+import SaveIcon   from '@material-ui/icons/Save';
 
 export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
 	class App extends React.Component {
@@ -30,7 +33,6 @@ export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
 			let { widgets = { items: [] }, dispatch } = this.props,
 			    { createDialog = false }              = this.state;
 			return <div>
-				<h1>Settings</h1>
 				<div className={ "desk" }>
 					{
 						widgets.items.map(
@@ -42,16 +44,15 @@ export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
 						)
 					}
 				</div>
-				<div
-					className={ "newBtn button" }
-					onClick={ () => dispatch(newWidget()) }>
-					newWidget
-				</div>
-				<div
-					className={ "saveBtn button" }
-					onClick={ e => dispatch(saveState()) }>
-					Save state
-				</div>
+				
+				<Fab aria-label="edit" className={ "newBtn button" }
+				     onClick={ e => dispatch(newWidget()) }>
+					<CreateIcon/>
+				</Fab>
+				<Fab aria-label="Delete" className={ "saveBtn button" }
+				     onClick={ e => dispatch(saveState()) }>
+					<SaveIcon/>
+				</Fab>
 			</div>
 		}
 	}

@@ -13,27 +13,45 @@
  */
 import PropTypes    from "prop-types";
 import React        from "react";
+import Fab          from '@material-ui/core/Fab';
+import DeleteIcon   from '@material-ui/icons/Delete';
+import EditIcon     from '@material-ui/icons/Edit';
+import SaveIcon     from '@material-ui/icons/Save';
 import {connect}    from 'react-redux'
 import WeatherInfos from "../components/WeatherInfos.js";
 import {
-	weatherSearch
+	weatherSearch, rmWidget
 }                   from "App/store/actions/updateWidget";
-
-if ( typeof window !== "undefined" )
-	require('react-dropzone-component/styles/filepicker.css');
 
 @connect()
 export default class WeatherBlock extends React.Component {
 	static propTypes = {
-		record: PropTypes.object,
+		record  : PropTypes.object.isRequired,
+		disabled: PropTypes.bool,
 	};
 	state            = {};
 	
+	componentWillMount() {
+		let { dispatch, record } = this.props;
+		if ( record.location && !record.results )
+			dispatch(weatherSearch(record, record.location))
+		
+		this._refreshTm = setInterval(this.checkUpdate, 1000 * 60 * 1);
+	}
+	
+	componentWillUnmount() {
+		clearInterval(this._refreshTm);
+	}
+	
+	checkUpdate = () => {
+		let { dispatch, record } = this.props;
+		if ( record.location && record.fetched < (Date.now() - 1000 * 60 * 10) )
+			dispatch(weatherSearch(record, record.location))
+	}
+	
 	render() {
 		let {
-			    record: { position, size } = {},
-			    record,
-			    dispatch, onSelect, selected
+			    record, dispatch, disabled
 		    }     = this.props,
 		    state = this.state;
 		
@@ -41,21 +59,28 @@ export default class WeatherBlock extends React.Component {
 			<div className={ "WeatherBlock" }>
 				{
 					!this.state.editing &&
-					<div className={ "text" }>
+					<React.Fragment>
 						{
 							record.fetching && "Loading...."
 							|| record.results && <WeatherInfos weatherData={ record.results }/>
 							|| "Edit me !"
 						}
-						<button onClick={ e => this.setState({ editing: true }) }
-						        className={ "edit" }>🖋
-						</button>
-						<button onClick={ e => dispatch(rmWidget(record._id)) }
-						        className={ "delete" }>🖾
-						</button>
-					</div>
+						{
+							!disabled &&
+							<React.Fragment>
+								<Fab aria-label="edit" className={ "edit" }
+								     onClick={ e => this.setState({ editing: true }) }>
+									<EditIcon/>
+								</Fab>
+								<Fab aria-label="Delete" className={ "delete" }
+								     onClick={ e => dispatch(rmWidget(record._id)) }>
+									<DeleteIcon/>
+								</Fab>
+							</React.Fragment>
+						}
+					</React.Fragment>
 					||
-					<div className={ "editor" }>
+					<React.Fragment>
 						{
 							<div className={ "search" }>
 								<input type="text"
@@ -72,11 +97,13 @@ export default class WeatherBlock extends React.Component {
 							record.fetching && "Loading...." ||
 							record.results && <WeatherInfos weatherData={ record.results }/>
 						}
-						<button
-							disabled={ record.fetching }
-							onClick={ e => this.setState({ editing: false }) }>💾
-						</button>
-					</div>
+						
+						<Fab aria-label="Save" className={ "save" }
+						     disabled={ record.fetching }
+						     onClick={ e => this.setState({ editing: false }) }>
+							<SaveIcon/>
+						</Fab>
+					</React.Fragment>
 				}
 			</div>
 		);

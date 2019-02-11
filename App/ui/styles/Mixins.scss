@@ -1,4 +1,4 @@
-/*
+/*!
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,31 +12,42 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import React  from "react";
-import moment from "moment";
+@mixin aspect-ratio($ratio-or-width, $height: null) {
+  $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+  &:before {
+    content: '';
+    float: left;
+    padding-bottom: $padding;
+  }
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
 
+@mixin use_hvCenteredAbs() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-export default ( { weatherData } ) =>
-	<div className={ "MeteoInfos" }>
-		<div className={ "location" }>
-			{ weatherData.name }&nbsp;
-		</div>
-		<div className={ "background" }>
-			<img src={ "https://loremflickr.com/g/500/400/" + weatherData.name.toLocaleLowerCase() }/>
-		</div>
-		<div className={ "picto" }>
-			{
-				weatherData.weather[0] &&
-				<img
-					src={ "http://openweathermap.org/img/w/" + weatherData.weather[0].icon + '.png' }></img>
-			}<br/>
-			{
-				weatherData.weather[0] &&
-				weatherData.weather[0].description
-			}
-		</div>
-		<div className={ "infos" }>
-			<div className={ "temp" }>{ weatherData.main.temp }°</div>
-			<div className={ "wind" }>{ weatherData.wind.speed } mh</div>
-		</div>
-	</div>;
+@mixin use_hvCenteredContent() {
+
+  &:before {
+    content: ' ';
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+    margin-right: -1px;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+  text-align: center;
+  > * {
+    text-align: left;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}

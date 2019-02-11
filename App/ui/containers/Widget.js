@@ -11,22 +11,22 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-import PropTypes           from "prop-types";
-import React               from "react";
-import {DropzoneComponent} from "react-dropzone-component";
-import {Rnd}               from "react-rnd";
-import {connect}           from 'react-redux'
-import {selectWidget}      from "App/store/actions/updateWidget";
+import PropTypes      from "prop-types";
+import React          from "react";
+import {Rnd}          from "react-rnd";
+import {connect}      from 'react-redux'
+import {selectWidget} from "App/store/actions/updateWidget";
 import {
 	rmWidget, newWidget, updateWidget
-}                          from "App/store/actions/updateWidget";
+}                     from "App/store/actions/updateWidget";
 
 
 @connect()
 export default class Widget extends React.Component {
 	static propTypes = {
-		selected: PropTypes.boolean,
-		record  : PropTypes.object,
+		selected: PropTypes.bool,
+		disabled: PropTypes.bool,
+		record  : PropTypes.object.isRequired,
 		onSelect: PropTypes.func
 	};
 	state            = {};
@@ -44,14 +44,16 @@ export default class Widget extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    record, children,
+			    record, children, disabled,
 			    dispatch, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<Rnd
 				className={ "Widget" }
-				dragHandleClassName={ "handle" }
+				disableDragging={ !!disabled }
+				enableResizing={ disabled }
+				//dragHandleClassName={ "handle" }
 				style={ selected ? { zIndex: 2000 } : undefined }
 				size={ state.size || size }
 				position={ state.position || position }

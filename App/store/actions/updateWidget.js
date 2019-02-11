@@ -69,6 +69,7 @@ export function saveState( then ) {
 			})
 	};
 }
+
 export function weatherSearch( record, location, then ) {
 	
 	return ( dispatch, getState ) => {
@@ -85,6 +86,7 @@ export function weatherSearch( record, location, then ) {
 					{
 						...record,
 						fetching: false,
+						fetched : Date.now(),
 						results : res.body,
 						location
 					}));

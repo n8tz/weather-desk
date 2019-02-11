@@ -34,9 +34,10 @@ export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
 					{
 						widgets.items.map(
 							widget => <Widget key={ widget._id } record={ widget }
-							                  onSelect={ e => dispatch(selectWidget(widget._id)) }
+							                  disabled={ true }
 							                  selected={ widget._id == widgets.selectedWidgetId }>
-								<WeatherBlock record={ widget }/>
+								<WeatherBlock record={ widget }
+								              disabled={ true }/>
 							</Widget>
 						)
 					}
