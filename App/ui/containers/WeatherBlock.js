@@ -61,8 +61,8 @@ export default class WeatherBlock extends React.Component {
 					!this.state.editing &&
 					<React.Fragment>
 						{
-							record.fetching && "Loading...."
-							|| record.results && <WeatherInfos weatherData={ record.results }/>
+							record.results && <WeatherInfos weatherData={ record.results }/>
+							|| record.fetching && "Loading...."
 							|| "Edit me !"
 						}
 						{
