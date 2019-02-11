@@ -17,10 +17,9 @@ import {connect}                            from 'react-redux'
 import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
 import Widget                               from 'App/ui/containers/Widget.js';
 import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
-
-import Fab        from '@material-ui/core/Fab';
-import CreateIcon from '@material-ui/icons/Add';
-import SaveIcon   from '@material-ui/icons/Save';
+import Fab                                  from '@material-ui/core/Fab';
+import CreateIcon                           from '@material-ui/icons/Add';
+import SaveIcon                             from '@material-ui/icons/Save';
 
 export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 	class App extends React.Component {

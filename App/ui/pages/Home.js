@@ -14,21 +14,17 @@
 
 import React                                from 'react';
 import {connect}                            from 'react-redux'
-import shortid                              from "shortid";
 import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
 import Widget                               from 'App/ui/containers/Widget.js';
 import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
 
 
-export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
+export default connect(( { widgets } ) => ({ widgets }))(
 	class App extends React.Component {
-		state = {
-			createDialog: false
-		};
+		state = {};
 		
 		render() {
-			let { widgets = { items: [] }, dispatch } = this.props,
-			    { createDialog = false }              = this.state;
+			let { widgets = { items: [] }, dispatch } = this.props;
 			return <div>
 				<div className={ "desk" }>
 					{

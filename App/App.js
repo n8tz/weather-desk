@@ -16,13 +16,12 @@ import React                                      from 'react';
 import Home                                       from './ui/pages/Home';
 import Settings                                   from './ui/pages/Settings';
 import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
-
-import AppBar       from '@material-ui/core/AppBar';
-import Toolbar      from '@material-ui/core/Toolbar';
-import IconButton   from '@material-ui/core/IconButton';
-import Typography   from '@material-ui/core/Typography';
-import SettingsIcon from '@material-ui/icons/Settings';
-import HomeIcon     from '@material-ui/icons/Home';
+import AppBar                                     from '@material-ui/core/AppBar';
+import Toolbar                                    from '@material-ui/core/Toolbar';
+import IconButton                                 from '@material-ui/core/IconButton';
+import Typography                                 from '@material-ui/core/Typography';
+import SettingsIcon                               from '@material-ui/icons/Settings';
+import HomeIcon                                   from '@material-ui/icons/Home';
 import "./ui/styles/index.scss"
 
 export default class App extends React.Component {
@@ -42,16 +41,14 @@ export default class App extends React.Component {
 						<div className={ "tools" }>
 							<Link to={ "/" } className={ "homeBtn" }>
 								<IconButton aria-label="home"
-								            color="inherit"
-								            onClick={ e => this.setState({ editing: true }) }>
+								            color="inherit">
 									<HomeIcon/>
 								</IconButton>
 							</Link>
 							
 							<Link to={ "/settings" } className={ "settingsBtn" }>
 								<IconButton aria-label="settings"
-								            color="inherit"
-								            onClick={ e => this.setState({ editing: true }) }>
+								            color="inherit">
 									<SettingsIcon/>
 								</IconButton>
 							</Link>
