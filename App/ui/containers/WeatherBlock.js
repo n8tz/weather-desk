@@ -36,7 +36,7 @@ export default class WeatherBlock extends React.Component {
 		if ( record.location && !record.results )
 			dispatch(weatherSearch(record, record.location))
 		
-		this._refreshTm = setInterval(this.checkUpdate, 1000 * 60 * 1);
+		this._refreshTm = setInterval(this.checkUpdate, 1000 * 10);
 	}
 	
 	componentWillUnmount() {
@@ -45,7 +45,7 @@ export default class WeatherBlock extends React.Component {
 	
 	checkUpdate = () => {
 		let { dispatch, record } = this.props;
-		if ( record.location && record.fetched < (Date.now() - 1000 * 60 * 10) )
+		if ( record.location && record.fetched < (Date.now() - 1000 * 60) )
 			dispatch(weatherSearch(record, record.location))
 	}
 	

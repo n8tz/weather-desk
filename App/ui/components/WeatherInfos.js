@@ -16,10 +16,10 @@ import React  from "react";
 import moment from "moment";
 
 
-export default ( { weatherData } ) =>
+export default ( { weatherData, lastQuery } ) =>
 	<div className={ "MeteoInfos" }>
 		<div className={ "location" }>
-			{ weatherData.name }&nbsp;
+			{ weatherData.name }&nbsp;<sub>({ moment(weatherData.dt * 1000).fromNow() })</sub>
 		</div>
 		<div className={ "background" }>
 			<img src={ "https://source.unsplash.com/600x400/?day,sky," + (weatherData.name) }/>
