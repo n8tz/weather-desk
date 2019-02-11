@@ -26,7 +26,7 @@ export function newWidget( record ) {
 		type  : WIDGET_NEW,
 		record: {
 			_id     : shortid.generate(),
-			size    : { width: 350, height: 500 },
+			size    : { width: 350, height: 400 },
 			position: {
 				x: 100 + ~~(Math.random() * 600),
 				y: 100 + ~~(Math.random() * 600)

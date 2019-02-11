@@ -41,21 +41,23 @@ export default class App extends React.Component {
 						<Typography cvariant="h6" color="inherit" noWrap>
 							Weather desk
 						</Typography>
-						<Link to={ "/" } className={ "homeBtn" }>
-							<IconButton aria-label="home"
-							            color="inherit"
-							            onClick={ e => this.setState({ editing: true }) }>
-								<HomeIcon/>
-							</IconButton>
-						</Link>
-						
-						<Link to={ "/settings" } className={ "settingsBtn" }>
-							<IconButton aria-label="settings"
-							            color="inherit"
-							            onClick={ e => this.setState({ editing: true }) }>
-								<SettingsIcon/>
-							</IconButton>
-						</Link>
+						<div className={ "tools" }>
+							<Link to={ "/" } className={ "homeBtn" }>
+								<IconButton aria-label="home"
+								            color="inherit"
+								            onClick={ e => this.setState({ editing: true }) }>
+									<HomeIcon/>
+								</IconButton>
+							</Link>
+							
+							<Link to={ "/settings" } className={ "settingsBtn" }>
+								<IconButton aria-label="settings"
+								            color="inherit"
+								            onClick={ e => this.setState({ editing: true }) }>
+									<SettingsIcon/>
+								</IconButton>
+							</Link>
+						</div>
 					</Toolbar>
 				</AppBar>
 				

@@ -16,25 +16,6 @@ body, html {
   padding: 0;
 }
 
-@mixin use_hvCenteredContent() {
-
-  &:before {
-    content: ' ';
-    display: inline-block;
-    height: 100%;
-    width: 1px;
-    margin-right: -1px;
-    vertical-align: middle;
-    overflow: hidden;
-  }
-  text-align: center;
-  > * {
-    text-align: left;
-    vertical-align: middle;
-    display: inline-block;
-  }
-}
-
 .newBtn {
   position: absolute !important;
   bottom: 10px;
@@ -72,8 +53,16 @@ body, html {
   }
 }
 
-.AppBar {
-  a {
+.AppBar > div {
+
+  justify-content: space-between;
+
+  .tools {
+
     float: right !important;
+
+    svg {
+      color: white;
+    }
   }
 }

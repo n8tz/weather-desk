@@ -22,7 +22,7 @@ export default ( { weatherData } ) =>
 			{ weatherData.name }&nbsp;
 		</div>
 		<div className={ "background" }>
-			<img src={ "https://loremflickr.com/g/500/400/" + weatherData.name.toLocaleLowerCase() }/>
+			<img src={ "https://source.unsplash.com/600x400/?day,sky," + (weatherData.name) }/>
 		</div>
 		<div className={ "picto" }>
 			{
