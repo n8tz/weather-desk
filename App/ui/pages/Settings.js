@@ -14,24 +14,21 @@
 
 import React                                from 'react';
 import {connect}                            from 'react-redux'
-import shortid                              from "shortid";
 import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
 import Widget                               from 'App/ui/containers/Widget.js';
 import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
 
 import Fab        from '@material-ui/core/Fab';
-import CreateIcon from '@material-ui/icons/Create';
+import CreateIcon from '@material-ui/icons/Add';
 import SaveIcon   from '@material-ui/icons/Save';
 
-export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
+export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 	class App extends React.Component {
-		state = {
-			createDialog: false
-		};
+		state = {};
 		
 		render() {
 			let { widgets = { items: [] }, dispatch } = this.props,
-			    { createDialog = false }              = this.state;
+			    {}                                    = this.state;
 			return <div>
 				<div className={ "desk" }>
 					{
