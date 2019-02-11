@@ -78,10 +78,10 @@ export function weatherSearch( record, location, then ) {
 				...record,
 				fetching: location
 			}));
+		//should cancel previous query here...
 		return superagent
 			.get(getState().appState.src + location)
 			.then(( res ) => {
-				
 				dispatch(updateWidget(
 					{
 						...record,
