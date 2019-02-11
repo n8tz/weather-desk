@@ -12,51 +12,36 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+import React                                from 'react';
+import {connect}                            from 'react-redux'
+import shortid                              from "shortid";
+import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
+import Widget                               from 'App/ui/containers/Widget.js';
+import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
 
-import App              from "App/index.js";
-import {renderToString} from "react-dom/server";
 
-var wpiConf = require('App/.wpiConfig.json'), currentState,
-    express = require('express');
-
-
-export default ( server ) => {
-	
-	server.get(
-		'/',
-		function ( req, res, next ) {
-			App.renderSSR(
-				{
-					location: req.url,
-					state   : currentState
-				},
-				( err, html, nstate ) => {
-					res.send(200, html)
-				}
-			)
+export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
+	class App extends React.Component {
+		state = {
+			createDialog: false
+		};
+		
+		render() {
+			let { widgets = { items: [] }, dispatch } = this.props,
+			    { createDialog = false }              = this.state;
+			return <div>
+				<div className={ "desk" }>
+					{
+						widgets.items.map(
+							widget => <Widget key={ widget._id } record={ widget }
+							                  onSelect={ e => dispatch(selectWidget(widget._id)) }
+							                  selected={ widget._id == widgets.selectedWidgetId }>
+								<WeatherBlock record={ widget }/>
+							</Widget>
+						)
+					}
+				</div>
+			</div>
 		}
-	);
-	server.get(
-		'/settings',
-		function ( req, res, next ) {
-			App.renderSSR(
-				{
-					location: req.url,
-					state   : currentState
-				},
-				( err, html, nstate ) => {
-					res.send(200, html)
-				}
-			)
-		}
-	);
-	server.use(express.static(wpiConf.projectRoot + '/dist'));
-	
-	server.use("/medias", express.static(wpiConf.projectRoot + '/public'));
-	
-	server.post('/', function ( req, res, next ) {
-		console.log("New state pushed")
-		currentState = req.body;
-		res.send(200, 'ok')
-	});
-};
+	}
+)

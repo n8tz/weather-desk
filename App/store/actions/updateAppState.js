@@ -13,50 +13,28 @@
  */
 
 
-import App              from "App/index.js";
-import {renderToString} from "react-dom/server";
+import superagent     from "superagent";
+import {updateWidget} from "./updateWidget";
 
-var wpiConf = require('App/.wpiConfig.json'), currentState,
-    express = require('express');
+export const SELECTED_WIDGET_CHANGED = 'SELECTED_WIDGET_CHANGED'
+export const SAVING_STATE            = 'SAVING_STATE'
 
+export function selectWidget( wid ) {
+	return {
+		type: SELECTED_WIDGET_CHANGED,
+		wid
+	}
+}
 
-export default ( server ) => {
-	
-	server.get(
-		'/',
-		function ( req, res, next ) {
-			App.renderSSR(
-				{
-					location: req.url,
-					state   : currentState
-				},
-				( err, html, nstate ) => {
-					res.send(200, html)
-				}
-			)
-		}
-	);
-	server.get(
-		'/settings',
-		function ( req, res, next ) {
-			App.renderSSR(
-				{
-					location: req.url,
-					state   : currentState
-				},
-				( err, html, nstate ) => {
-					res.send(200, html)
-				}
-			)
-		}
-	);
-	server.use(express.static(wpiConf.projectRoot + '/dist'));
-	
-	server.use("/medias", express.static(wpiConf.projectRoot + '/public'));
-	
-	server.post('/', function ( req, res, next ) {
-		console.log("New state pushed")
-		currentState = req.body;
-		res.send(200, 'ok')
-	});
-};
+export function saveState( then ) {
+	return ( dispatch, getState ) => {
+		return superagent
+			.post('/', getState())
+			.then(( res ) => {
+				console.log('Saved')
+			})
+			.catch(e => {
+				console.log('Not Saved')
+			})
+	};
+}

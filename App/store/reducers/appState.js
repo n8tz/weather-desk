@@ -11,10 +11,16 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
+import {SELECTED_WIDGET_CHANGED} from '../actions/updateAppState';
 
 
 export function appState( state = {}, action ) {
 	switch ( action.type ) {
+		case SELECTED_WIDGET_CHANGED:
+			return {
+				...state,
+				selectedWidgetId: action.wid
+			};
 		default:
 			return state
 	}

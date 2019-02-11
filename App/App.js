@@ -12,48 +12,36 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import React                                from 'react';
-import {connect}                            from 'react-redux'
-import shortid                              from "shortid";
-import {selectWidget, saveState, newWidget} from "./store/actions/updateWidget";
-import Widget                               from './ui/containers/Widget.js';
-import WeatherBlock                         from './ui/containers/WeatherBlock';
+import React                                      from 'react';
+import Home                                       from './ui/pages/Home';
+import Settings                                   from './ui/pages/Settings';
+import {BrowserRouter, StaticRouter, Route, Link} from "react-router-dom";
 
 import "./ui/styles/index.scss"
 
-export default connect(( { widgets, playlists } ) => ({ widgets, playlists }))(
-	class App extends React.Component {
-		state = {
-			createDialog: false
-		};
-		
-		render() {
-			let { widgets = { items: [] }, dispatch } = this.props,
-			    { createDialog = false }              = this.state;
-			return <div>
-				<h1>play with redux</h1>
-				<div className={ "desk" }>
-					{
-						widgets.items.map(
-							widget => <Widget key={ widget._id } record={ widget }
-							                  onSelect={ e => dispatch(selectWidget(widget._id)) }
-							                  selected={ widget._id == widgets.selectedWidgetId }>
-								<WeatherBlock record={ widget }/>
-							</Widget>
-						)
-					}
-				</div>
-				<div
-					className={ "newBtn button" }
-					onClick={ () => dispatch(newWidget()) }>
-					newWidget
-				</div>
-				<div
-					className={ "saveBtn button" }
-					onClick={ e => dispatch(saveState()) }>
-					Save state
-				</div>
+export default class App extends React.Component {
+	state = {};
+	
+	render() {
+		let Router = BrowserRouter;
+		if ( this.props.location )
+			Router = StaticRouter;
+		return <Router location={ this.props.location }>
+			<div>
+				<ul>
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<Link to="/settings">Settings</Link>
+					</li>
+				</ul>
+				
+				<hr/>
+				
+				<Route path="/" component={ Home }/>
+				<Route path="/Settings" component={ Settings }/>
 			</div>
-		}
+		</Router>
 	}
-)
+}
