@@ -78,26 +78,31 @@ export function weatherSearch( record, location, then ) {
 				...record,
 				fetching: location
 			}));
-		//should cancel previous query here...
 		return superagent
 			.get(getState().appState.src + location)
 			.then(( res ) => {
-				dispatch(updateWidget(
-					{
-						...record,
-						fetching: false,
-						fetched : Date.now(),
-						results : res.body,
-						location
-					}));
+				
+				let current = getState().widgets.items.find(item => (item._id == record._id));
+				
+				if ( current && current.fetching === location )
+					dispatch(updateWidget(
+						{
+							...record,
+							fetching: false,
+							fetched : Date.now(),
+							results : res.body,
+							location
+						}));
 			})
 			.catch(e => {
 				
-				dispatch(updateWidget(
-					{
-						...record,
-						fetching: false,
-					}));
+				let current = getState().widgets.items.find(item => (item._id == record._id));
+				if ( current && current.fetching === location )
+					dispatch(updateWidget(
+						{
+							...record,
+							fetching: false,
+						}));
 			})
 	};
 }
