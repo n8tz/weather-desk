@@ -16,9 +16,17 @@
 import App              from "App/index.js";
 import {renderToString} from "react-dom/server";
 
-var wpiConf = require('App/.wpiConfig.json'), currentState,
+var wpiConf = require('App/.wpiConfig.json'),
+    currentState,
+    fs      = require('fs'),
     express = require('express');
 
+try {
+	currentState = fs.readFileSync('./lastAppState.json');
+	currentState = JSON.parse(currentState);
+} catch ( e ) {
+	currentState = undefined;
+}
 
 export default ( server ) => {
 	
@@ -57,6 +65,11 @@ export default ( server ) => {
 	server.post('/', function ( req, res, next ) {
 		console.log("New state pushed")
 		currentState = req.body;
+		try {
+			fs.writeFileSync('./lastAppState.json', JSON.stringify(req.body));
+		} catch ( e ) {
+		
+		}
 		res.send(200, 'ok')
 	});
 };
