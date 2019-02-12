@@ -20,9 +20,6 @@ import {Provider}       from 'react-redux'
 import configureStore   from './store/configure'
 import initialState     from './store/initialState'
 
-const indexTpl = require('./index.html.tpl');
-
-
 const ctrl = {
 	renderTo( node, initialState = {} ) {
 		const store  = configureStore(initialState),
@@ -50,9 +47,9 @@ const ctrl = {
 			)
 		}
 	},
-	renderSSR( { state, location }, cb ) {
-		const store = configureStore(state || initialState)
-		let content = "", html, preloadedState;
+	renderSSR: ( { state, location, indexTpl }, cb ) => {
+		const store    = configureStore(state || initialState)
+		let content    = "", html, preloadedState;
 		
 		try {
 			content        = renderToString(

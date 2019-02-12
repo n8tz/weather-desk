@@ -16,10 +16,12 @@
 import App              from "App/index.js";
 import {renderToString} from "react-dom/server";
 
-var wpiConf = require('App/.wpiConfig.json'),
-    currentState,
-    fs      = require('fs'),
-    express = require('express');
+const wpiConf  = require('App/.wpiConfig.json'),
+      fs       = require('fs'),
+      express  = require('express'),
+      indexTpl = require('../index.html.tpl');
+
+let currentState;
 
 try {
 	currentState = fs.readFileSync('./lastAppState.json');
@@ -50,7 +52,8 @@ export default ( server ) => {
 			App.renderSSR(
 				{
 					location: req.url,
-					state   : currentState
+					state   : currentState,
+					indexTpl
 				},
 				( err, html, nstate ) => {
 					res.send(200, html)
