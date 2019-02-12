@@ -78,11 +78,14 @@ export function weatherSearch( record, location, then ) {
 				...record,
 				fetching: location
 			}));
+		
+		// should use more advanced system
+		
 		return superagent
 			.get(getState().appState.src + location)
 			.then(( res ) => {
 				
-				let current = getState().widgets.items.find(item => (item._id == record._id));
+				let current = getState().widgets.items.find(item => (item._id === record._id));
 				
 				if ( current && current.fetching === location )
 					dispatch(updateWidget(
@@ -96,7 +99,7 @@ export function weatherSearch( record, location, then ) {
 			})
 			.catch(e => {
 				
-				let current = getState().widgets.items.find(item => (item._id == record._id));
+				let current = getState().widgets.items.find(item => (item._id === record._id));
 				if ( current && current.fetching === location )
 					dispatch(updateWidget(
 						{
