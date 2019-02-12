@@ -30,7 +30,7 @@ Edit & add widgets from the setting page & save to persist.
 - add some weather infos wikidata / news in the widgets
 - add some user management
 - add some test
-- add some anims
+- add some anims & scrap picts directly from flikr
 - etc...
 
 ## Code structure
