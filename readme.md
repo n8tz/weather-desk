@@ -31,7 +31,7 @@ Edit & add widgets from the setting page & save to persist.
 - add some user management
 - add some test
 - add some anims & scrap picts directly from flikr
-- etc...
+- SSR fetching, etc...
 
 ## Code structure
 
