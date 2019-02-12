@@ -31,7 +31,7 @@ export default class App extends React.Component {
 		let Router = BrowserRouter;
 		if ( this.props.location )
 			Router = StaticRouter;
-		return <Router location={ this.props.location }>
+		return <Router location={ this.props.location } context={{}}>
 			<React.Fragment>
 				<AppBar position="static" className={ "AppBar" }>
 					<Toolbar>
