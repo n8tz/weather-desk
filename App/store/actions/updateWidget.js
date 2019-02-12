@@ -79,7 +79,7 @@ export function weatherSearch( record, location, then ) {
 				fetching: location
 			}));
 		
-		// should use more advanced system
+		// should use hashmap
 		
 		return superagent
 			.get(getState().appState.src + location)
