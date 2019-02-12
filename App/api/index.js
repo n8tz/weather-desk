@@ -38,7 +38,8 @@ export default ( server ) => {
 			App.renderSSR(
 				{
 					location: req.url,
-					state   : currentState
+					state   : currentState,
+					indexTpl
 				},
 				( err, html, nstate ) => {
 					res.send(200, html)
