@@ -29,7 +29,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Really basic drafty redux + react webpack-inherit example</title>
+    <title>Weather desk</title>
     <script>window.__STATE__  ={{=it.state || "{}"}};</script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 
