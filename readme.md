@@ -3,18 +3,28 @@
 
 ## How to start
 
-### setup
+### using docker-compose
+
+```
+docker-compose up
+```
+
+& start localhost:8080
+
+### using local setup
+
+#### setup
 ```
 npm i
 ```
 
-### dev
+#### dev
 ```
 npm run start-dev
 npm run runBrowser
 ```
 
-### prod
+#### prod
 ```
 npm run build
 npm run start
