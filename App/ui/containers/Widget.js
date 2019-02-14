@@ -50,9 +50,9 @@ export default class Widget extends React.Component {
 		    state = this.state;
 		return (
 			<Rnd
-				//className={ "Widget" }
-				//disableDragging={ !!disabled }
-				//enableResizing={ disabled }
+				className={ "Widget" }
+				disableDragging={ !!disabled }
+				enableResizing={ disabled }
 				dragHandleClassName={ "handle" }
 				style={ { zIndex: selected ? 2000 : 1 } }
 				size={ state.size || size }
