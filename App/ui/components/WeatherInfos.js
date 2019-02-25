@@ -27,14 +27,15 @@ export default ( { weatherData, lastQuery } ) =>
 		<div className={ "picto" }>
 			{
 				weatherData.weather[0] &&
-				<img
-					src={ "http://openweathermap.org/img/w/" + weatherData.weather[0].icon + '.png' }></img>
+				<img src={ "http://openweathermap.org/img/w/" + weatherData.weather[0].icon + '.png' }></img>
 			}<br/>
 			{
 				weatherData.weather[0] &&
 				weatherData.weather[0].description
 			}
 		</div>
+		
+		
 		<div className={ "infos" }>
 			<div className={ "temp" }>{ weatherData.main.temp }°</div>
 			<div className={ "wind" }>{ weatherData.wind.speed } mh</div>

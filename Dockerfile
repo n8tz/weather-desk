@@ -20,6 +20,13 @@ RUN apk --no-cache update \
 
 
 
+RUN echo $'#!/bin/bash\n\
+cd /home/app\n\
+npm i && npm run start-dev' > /bin/run.sh
 
-CMD cd /home/app && npm i&& npm run start-dev || bash
+RUN chmod a+x /bin/run.sh
 
+WORKDIR /home/app
+
+
+ENTRYPOINT ["/bin/bash", "-c", "/bin/run.sh"]
