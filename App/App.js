@@ -31,8 +31,6 @@ export default class App extends React.Component {
 			<React.Fragment>
 				<AppBar/>
 				
-				
-				!!
 				<Route path="/" exact component={ Home }/>
 				<Route path="/settings" component={ Settings }/>
 			</React.Fragment>
