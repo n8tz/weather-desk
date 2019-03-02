@@ -76,7 +76,8 @@
     "url-loader": "^1.1.2"
   },
   "devDependencies": {
-    "wpi-react-redux-sass-ssr": "^1.0.3",
-    "webpack-inherit": "^1.4.5"
+    "babel-core": "^6.26.3",
+    "webpack-inherit": "^1.4.5",
+    "wpi-react-redux-sass-ssr": "^1.0.3"
   }
 }
