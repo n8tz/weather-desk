@@ -14,6 +14,13 @@
 
 import {WIDGET_CHANGED, WIDGET_NEW, WIDGET_RM, SELECTED_WIDGET_CHANGED} from '../actions/updateWidget';
 
+
+/**
+ * Should use id hashmap
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 export function widgets( state = { right: false }, action ) {
 	switch ( action.type ) {
 		case SELECTED_WIDGET_CHANGED:
