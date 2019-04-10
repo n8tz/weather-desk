@@ -15,8 +15,9 @@
 import {WIDGET_CHANGED, WIDGET_NEW, WIDGET_RM, SELECTED_WIDGET_CHANGED} from '../actions/updateWidget';
 
 
+
 /**
- * Should use id hashmap
+ * Should use id hashmap & reducer creator
  * @param state
  * @param action
  * @returns {*}
