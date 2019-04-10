@@ -25,16 +25,7 @@
     "api": {
       "rootFolder": "App",
       "vars": {
-        "externals": true,
-        "webpackPatch": [
-          {
-            "resolve": {
-              "extensions": [
-                ".api.js"
-              ]
-            }
-          }
-        ]
+        "externals": true
       },
       "extend": [
         "wpi-react-redux-sass-ssr"
