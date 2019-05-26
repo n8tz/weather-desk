@@ -41,6 +41,28 @@ export default class Widget extends React.Component {
 			}));
 	};
 	
+	drag   = ( e, d ) => {
+		let {
+			    record,
+			    dispatch, onSelect, selected
+		    } = this.props;
+		!selected && onSelect(record)
+		this.setState(
+			{
+				position: { x: d.x, y: d.y }
+			});
+	};
+	resize = ( e, direction, ref, delta, position ) => {
+		this.setState(
+			{
+				position,
+				size: {
+					width : ref.offsetWidth,
+					height: ref.offsetHeight
+				}
+			});
+	};
+	
 	render() {
 		let {
 			    record: { position, size } = {},
@@ -58,23 +80,8 @@ export default class Widget extends React.Component {
 				position={ state.position || position }
 				onDragStop={ this.saveState }
 				onResizeStop={ this.saveState }
-				onDrag={ ( e, d ) => {
-					!selected && onSelect(record)
-					this.setState(
-						{
-							position: { x: d.x, y: d.y }
-						});
-				} }
-				onResize={ ( e, direction, ref, delta, position ) => {
-					this.setState(
-						{
-							position,
-							size: {
-								width : ref.offsetWidth,
-								height: ref.offsetHeight
-							}
-						});
-				} }>
+				onDrag={ this.drag }
+				onResize={ this.resize }>
 				<div className={ " content" }>
 					{ children }
 				</div>

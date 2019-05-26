@@ -23,6 +23,11 @@ export default connect(( { widgets } ) => ({ widgets }))(
 	class App extends React.Component {
 		state = {};
 		
+		selectWidget = record => {
+			let { widgets = {}, appState, dispatch } = this.props;
+			dispatch(selectWidget(record._id))
+		}
+		
 		render() {
 			let { widgets = { items: [] }, dispatch } = this.props;
 			return <div className={ "desk" }>
@@ -33,7 +38,7 @@ export default connect(( { widgets } ) => ({ widgets }))(
 								key={ wid }
 								record={ widgets[wid] }
 								disabled={ true }
-								onSelect={ e => dispatch(selectWidget(wid)) }
+								onSelect={ this.selectWidget }
 								selected={ wid === appState.selectedWidgetId }>
 								<WeatherBlock record={ widgets[wid] }/>
 							</Widget>

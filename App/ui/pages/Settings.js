@@ -23,9 +23,14 @@ import SaveIcon                  from '@material-ui/icons/Save';
 
 export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 	class App extends React.Component {
-		state    = {};
-		rmWidget = record => {
+		state        = {};
+		rmWidget     = record => {
+			let { widgets = {}, appState, dispatch } = this.props;
 			dispatch(rmWidget(record._id))
+		}
+		selectWidget = record => {
+			let { widgets = {}, appState, dispatch } = this.props;
+			dispatch(selectWidget(record._id))
 		}
 		
 		render() {
@@ -39,7 +44,7 @@ export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 								<Widget
 									key={ wid }
 									record={ widgets[wid] }
-									onSelect={ e => dispatch(selectWidget(wid)) }
+									onSelect={ this.selectWidget }
 									selected={ wid === appState.selectedWidgetId }>
 									<WeatherBlock record={ widgets[wid] }
 									              onClose={ this.rmWidget }/>
