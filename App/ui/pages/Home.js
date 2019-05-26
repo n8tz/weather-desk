@@ -27,18 +27,15 @@ export default connect(( { widgets } ) => ({ widgets }))(
 			let { widgets = { items: [] }, dispatch } = this.props;
 			return <div className={ "desk" }>
 				{
-					widgets.items.map(
-						widget =>
+					Object.keys(widgets).map(
+						wid =>
 							<Widget
-								key={ widget._id }
-								record={ widget }
+								key={ wid }
+								record={ widgets[wid] }
 								disabled={ true }
-								selected={ widget._id === widgets.selectedWidgetId }>
-								
-								<WeatherBlock
-									record={ widget }
-									disabled={ true }/>
-							
+								onSelect={ e => dispatch(selectWidget(wid)) }
+								selected={ wid === appState.selectedWidgetId }>
+								<WeatherBlock record={ widgets[wid] }/>
 							</Widget>
 					)
 				}

@@ -68,6 +68,12 @@ export default class WeatherBlock extends React.Component {
 	};
 	
 	stopPropagation = e => e.stopPropagation();
+	doClose         = e => {
+		let {
+			    record, onClose
+		    } = this.props;
+		onClose && onClose(record);
+	};
 	
 	render() {
 		let {
@@ -76,7 +82,6 @@ export default class WeatherBlock extends React.Component {
 			    disabled, onClose
 		    }                      = this.props,
 		    { editing, searching } = this.state;
-		
 		return (
 			<div className={ "WeatherBlock" }>
 				{
@@ -95,7 +100,7 @@ export default class WeatherBlock extends React.Component {
 									<EditIcon/>
 								</Fab>
 								<Fab aria-label="Delete" className={ "delete" }
-								     onClick={ onClose }>
+								     onClick={ this.doClose }>
 									<DeleteIcon/>
 								</Fab>
 							</React.Fragment>
