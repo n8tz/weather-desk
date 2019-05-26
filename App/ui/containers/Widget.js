@@ -21,6 +21,17 @@ import {
 }                     from "App/store/actions/updateWidget";
 
 
+const resizeHandles = {
+	bottom     : true,
+	bottomLeft : true,
+	bottomRight: true,
+	left       : true,
+	right      : true,
+	top        : true,
+	topLeft    : true,
+	topRight   : true,
+}
+
 @connect()
 export default class Widget extends React.Component {
 	static propTypes = {
@@ -74,7 +85,7 @@ export default class Widget extends React.Component {
 			<Rnd
 				className={ "Widget" }
 				disableDragging={ !editable }
-				enableResizing={ editable }
+				enableResizing={ editable && resizeHandles }
 				style={ { zIndex: selected ? 2000 : 1 } }
 				size={ state.size || size }
 				position={ state.position || position }
