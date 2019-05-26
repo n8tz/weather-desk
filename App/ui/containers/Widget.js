@@ -25,7 +25,7 @@ import {
 export default class Widget extends React.Component {
 	static propTypes = {
 		selected: PropTypes.bool,
-		disabled: PropTypes.bool,
+		editable: PropTypes.bool,
 		record  : PropTypes.object.isRequired,
 		onSelect: PropTypes.func
 	};
@@ -66,15 +66,15 @@ export default class Widget extends React.Component {
 	render() {
 		let {
 			    record: { position, size } = {},
-			    record, children, disabled,
+			    record, children, editable,
 			    dispatch, onSelect, selected
 		    }     = this.props,
 		    state = this.state;
 		return (
 			<Rnd
 				className={ "Widget" }
-				disableDragging={ !!disabled }
-				enableResizing={ disabled }
+				disableDragging={ !!editable }
+				enableResizing={ editable }
 				style={ { zIndex: selected ? 2000 : 1 } }
 				size={ state.size || size }
 				position={ state.position || position }

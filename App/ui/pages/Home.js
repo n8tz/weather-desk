@@ -12,14 +12,14 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import React                                from 'react';
-import {connect}                            from 'react-redux'
-import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
-import Widget                               from 'App/ui/containers/Widget.js';
-import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
+import React                     from 'react';
+import {connect}                 from 'react-redux'
+import {selectWidget, saveState} from "App/store/actions/updateAppState";
+import Widget                    from 'App/ui/containers/Widget.js';
+import WeatherBlock              from 'App/ui/containers/WeatherBlock';
 
 
-export default connect(( { widgets } ) => ({ widgets }))(
+export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 	class App extends React.Component {
 		state = {};
 		
@@ -29,7 +29,7 @@ export default connect(( { widgets } ) => ({ widgets }))(
 		}
 		
 		render() {
-			let { widgets = { items: [] }, dispatch } = this.props;
+			let { widgets = {}, appState } = this.props;
 			return <div className={ "desk" }>
 				{
 					Object.keys(widgets).map(
@@ -37,10 +37,11 @@ export default connect(( { widgets } ) => ({ widgets }))(
 							<Widget
 								key={ wid }
 								record={ widgets[wid] }
-								disabled={ true }
+								editable={ true }
 								onSelect={ this.selectWidget }
 								selected={ wid === appState.selectedWidgetId }>
-								<WeatherBlock record={ widgets[wid] }/>
+								<WeatherBlock record={ widgets[wid] }
+								              editable={ true }/>
 							</Widget>
 					)
 				}

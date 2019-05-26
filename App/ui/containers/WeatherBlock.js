@@ -30,7 +30,7 @@ import {
 export default class WeatherBlock extends React.Component {
 	static propTypes = {
 		record  : PropTypes.object.isRequired,
-		disabled: PropTypes.bool,
+		editable: PropTypes.bool,
 	};
 	state            = {};
 	
@@ -59,7 +59,7 @@ export default class WeatherBlock extends React.Component {
 		let {
 			    record,
 			    dispatch,
-			    disabled
+			    editable
 		    } = this.props;
 		
 		this.setState({ searching });
@@ -79,7 +79,7 @@ export default class WeatherBlock extends React.Component {
 		let {
 			    record,
 			    dispatch,
-			    disabled, onClose
+			    editable, onClose
 		    }                      = this.props,
 		    { editing, searching } = this.state;
 		return (
@@ -93,7 +93,7 @@ export default class WeatherBlock extends React.Component {
 							|| "Edit me !"
 						}
 						{
-							!disabled &&
+							!editable &&
 							<React.Fragment>
 								<Fab aria-label="edit" className={ "edit" }
 								     onClick={ this.toggleEdit }>
@@ -123,7 +123,7 @@ export default class WeatherBlock extends React.Component {
 						}
 						
 						<Fab aria-label="Save" className={ "save" }
-						     disabled={ record.fetching }
+						     editable={ record.fetching }
 						     onClick={ this.toggleEdit }>
 							<SaveIcon/>
 						</Fab>
