@@ -73,7 +73,7 @@ export default class Widget extends React.Component {
 		return (
 			<Rnd
 				className={ "Widget" }
-				disableDragging={ !!editable }
+				disableDragging={ !editable }
 				enableResizing={ editable }
 				style={ { zIndex: selected ? 2000 : 1 } }
 				size={ state.size || size }

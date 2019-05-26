@@ -93,7 +93,7 @@ export default class WeatherBlock extends React.Component {
 							|| "Edit me !"
 						}
 						{
-							!editable &&
+							editable &&
 							<React.Fragment>
 								<Fab aria-label="edit" className={ "edit" }
 								     onClick={ this.toggleEdit }>
@@ -123,7 +123,7 @@ export default class WeatherBlock extends React.Component {
 						}
 						
 						<Fab aria-label="Save" className={ "save" }
-						     editable={ record.fetching }
+						     disabled={ record.fetching }
 						     onClick={ this.toggleEdit }>
 							<SaveIcon/>
 						</Fab>
