@@ -12,33 +12,34 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import React                                from 'react';
-import {connect}                            from 'react-redux'
-import {selectWidget, saveState, newWidget} from "App/store/actions/updateWidget";
-import Widget                               from 'App/ui/containers/Widget.js';
-import WeatherBlock                         from 'App/ui/containers/WeatherBlock';
-import Fab                                  from '@material-ui/core/Fab';
-import CreateIcon                           from '@material-ui/icons/Add';
-import SaveIcon                             from '@material-ui/icons/Save';
+import React                     from 'react';
+import {connect}                 from 'react-redux'
+import {selectWidget, saveState} from "App/store/actions/updateAppState";
+import {newWidget, rmWidget}     from "App/store/actions/updateWidget";
+import {Widget, WeatherBlock}    from 'App/ui/containers/(*).js';
+import Fab                       from '@material-ui/core/Fab';
+import CreateIcon                from '@material-ui/icons/Add';
+import SaveIcon                  from '@material-ui/icons/Save';
 
 export default connect(( { widgets, appState } ) => ({ widgets, appState }))(
 	class App extends React.Component {
 		state = {};
 		
 		render() {
-			let { widgets = { items: [] }, dispatch } = this.props,
-			    {}                                    = this.state;
+			let { widgets = {}, appState, dispatch } = this.props,
+			    {}                                   = this.state;
 			return <div>
 				<div className={ "desk" }>
 					{
-						widgets.items.map(
-							widget =>
+						Object.keys(widgets).map(
+							wid =>
 								<Widget
-									key={ widget._id }
-									record={ widget }
-									onSelect={ e => dispatch(selectWidget(widget._id)) }
-									selected={ widget._id === widgets.selectedWidgetId }>
-									<WeatherBlock record={ widget }/>
+									key={ wid }
+									record={ widgets[wid] }
+									onSelect={ e => dispatch(selectWidget(wid)) }
+									selected={ wid === appState.selectedWidgetId }>
+									<WeatherBlock record={ widgets[wid] }
+									              onClose={ e => dispatch(rmWidget(wid)) }/>
 								</Widget>
 						)
 					}

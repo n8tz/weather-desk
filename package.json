@@ -36,7 +36,7 @@
     "build": "wpi& wpi :api",
     "build-api": "wpi :api",
     "dev-api": "wpi :api -w",
-    "start-dev": "concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 --watch-poll 500 --watch-aggregate-timeout 300\" \"wpi :api -w\" \"sleep 3&&nodemon --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
+    "start-dev": "wpi :api&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0 --watch-poll 500 --watch-aggregate-timeout 300\" \"wpi :api -w\" \"sleep 3&&nodemon --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
     "start": "node ./dist/App.server.js  -p 8080",
     "runBrowser": "start http://localhost:8080"
   },
