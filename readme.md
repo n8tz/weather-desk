@@ -32,16 +32,7 @@ npm run start
 
 ## How to use
 
-Edit & add widgets from the setting page & save to persist.
-
-### What can be improved
-
-- Code quality / comments
-- add some weather infos wikidata / news in the widgets
-- add some user management
-- add some test
-- add some anims & scrap picts directly from flikr
-- SSR fetching, etc...
+Edit & add widgets from the setting page & save to persist it on the server.
 
 ## Code structure
 
