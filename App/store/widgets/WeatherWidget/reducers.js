@@ -16,20 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import AppBar     from '@material-ui/core/AppBar';
-import Toolbar    from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import React      from "react";
+import {WIDGET_CHANGED} from '../actions';
 
-
-export default ( { children } ) =>
-	<AppBar position="static" className={"AppBar"}>
-		<Toolbar>
-			<Typography cvariant="h6" color="inherit" noWrap>
-				Widget desk
-			</Typography>
-			<div className={"tools"}>
-				{children}
-			</div>
-		</Toolbar>
-	</AppBar>;
+export default function widgets( widget, action ) {
+	switch ( action.type ) {
+		case WIDGET_CHANGED:
+			return {
+				...widget,
+				...action.record
+			}
+		default:
+			return widget
+	}
+}

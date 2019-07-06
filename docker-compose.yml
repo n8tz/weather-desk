@@ -1,7 +1,6 @@
 version: '3'
 volumes:
   node_modules:
-  emptyDockerDir:
 networks:
   app_network:
 services:
@@ -11,6 +10,8 @@ services:
     volumes:
       - .:/home/app
       - node_modules:/home/app/node_modules
+    working_dir: /home/app
+    command: bash -c "npm i&&npm run start-dev"
     ports:
       - "8080:8080"
     networks:

@@ -11,22 +11,13 @@ RUN apk --no-cache update \
         automake \
         autoconf \
         zlib-dev \
-        libpng-dev \
         mongodb-tools \
         bash \
-        lcms2-dev \
         rsync \
         git
 
 
 
-RUN echo $'#!/bin/bash\n\
-cd /home/app\n\
-npm i && npm run start-dev' > /bin/run.sh
 
-RUN chmod a+x /bin/run.sh
+CMD bash
 
-WORKDIR /home/app
-
-
-ENTRYPOINT ["/bin/bash", "-c", "/bin/run.sh"]

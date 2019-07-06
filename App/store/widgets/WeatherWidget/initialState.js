@@ -15,21 +15,4 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-import AppBar     from '@material-ui/core/AppBar';
-import Toolbar    from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import React      from "react";
-
-
-export default ( { children } ) =>
-	<AppBar position="static" className={"AppBar"}>
-		<Toolbar>
-			<Typography cvariant="h6" color="inherit" noWrap>
-				Widget desk
-			</Typography>
-			<div className={"tools"}>
-				{children}
-			</div>
-		</Toolbar>
-	</AppBar>;
+export default {}

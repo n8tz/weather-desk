@@ -16,20 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import AppBar     from '@material-ui/core/AppBar';
-import Toolbar    from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import React      from "react";
+
+import superagent from "superagent";
+
+export const SAVING_STATE = 'SAVING_STATE'
 
 
-export default ( { children } ) =>
-	<AppBar position="static" className={"AppBar"}>
-		<Toolbar>
-			<Typography cvariant="h6" color="inherit" noWrap>
-				Widget desk
-			</Typography>
-			<div className={"tools"}>
-				{children}
-			</div>
-		</Toolbar>
-	</AppBar>;
+export function saveState( then ) {
+	return ( dispatch, getState ) => {
+		return superagent
+			.post('/', getState())
+			.then(( res ) => {
+				console.log('Saved')
+			})
+			.catch(e => {
+				console.log('Not Saved')
+			})
+	};
+}
