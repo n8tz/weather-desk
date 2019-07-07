@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -11,61 +11,43 @@
  *  @author : Nathanael Braun
  *  @contact : n8tz.js@gmail.com
  */
-
-
-.WeatherWidget {
-  line-height: 1;
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0;
-  font-size: 22px;
-  display: inline-block;
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
-
-  .edit {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    display: none;
-  }
-
-  .delete {
-    position: absolute;
-    top: 75px;
-    right: 5px;
-    display: none;
-  }
-
-  &:hover .edit,
-  &:hover .delete {
-    display: block;
-  }
-
-
-  .search {
-    input {
-      position: absolute;
-      top: 5px;
-      width: calc(100% - 20px);
-      height: 25px;
-      font-size: 22px;
-      text-align: center;
-      left: 10px;
-      z-index: 10;
-      border-radius: 15px;
-    }
-  }
-
-  .save {
-
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-  }
+export default {
+	selectedWidgetId: null,
+	items           : {
+		"rkUQHZrqM": {
+			"_id"     : "rkUQHZrqM",
+			"location": "Lisbonne",
+			"type"    : "WeatherWidget",
+			"size"    : { "width": 350, "height": 400 },
+			"position": { "x": 403, "y": 111 },
+		},
+		"YDNiVOf1j": {
+			"_id"     : "YDNiVOf1j",
+			"type"    : "WeatherWidget",
+			"size"    : { "width": 350, "height": 400 },
+			"position": { "x": 21, "y": 108 },
+			"location": "paris"
+		},
+		"FkQ3V9Hcb": {
+			"_id"     : "FkQ3V9Hcb",
+			"type"    : "WeatherWidget",
+			"size"    : { "width": 350, "height": 400 },
+			"position": { "x": 771, "y": 108 },
+			"location": "rome"
+		},
+		"bYNiMYG_0": {
+			"_id"     : "bYNiMYG_0",
+			"type"    : "WeatherWidget",
+			"size"    : { "width": 514, "height": 329 },
+			"position": { "x": 28, "y": 525 },
+			"location": "marseille"
+		},
+		"5SJehewl2": {
+			"_id"     : "5SJehewl2",
+			"type"    : "WeatherWidget",
+			"size"    : { "width": 563, "height": 328 },
+			"position": { "x": 558, "y": 526 },
+			"location": "montpellier"
+		},
+	}
 }

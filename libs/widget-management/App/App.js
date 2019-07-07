@@ -12,38 +12,53 @@
  *  @contact : n8tz.js@gmail.com
  */
 
-import Fab        from '@material-ui/core/Fab';
-import CreateIcon from '@material-ui/icons/Add';
-import SaveIcon   from '@material-ui/icons/Save';
 import Actions    from "App/store/actions";
 import React      from 'react';
 import {connect}  from 'react-redux'
+import {Widget}   from './ui/components/(*).js';
+import "./ui/styles/index.scss"
+import allWidgets from './ui/widgets/(*).js';
 
-export default connect()(
-	class ToolBar extends React.Component {
-		static propTypes = {};
-		state            = {};
+
+@connect(( { widgets, appState } ) => ({ widgets, appState }))
+export default class App extends React.Component {
+	state = {};
+	
+	rmWidget = record => {
+		let { dispatch } = this.props;
+		dispatch(Actions.widgets.rmWidget(record._id))
+	};
+	
+	selectWidget = record => {
+		let { dispatch } = this.props;
+		dispatch(Actions.widgets.selectWidget(record._id))
+	};
+	updateWidget = record => {
+		let { dispatch } = this.props;
+		dispatch(Actions.widgets.updateWidget(record))
+	};
+	
+	render() {
+		let { widgets = {} } = this.props,
+		    {}               = this.state;
 		
-		newWidget = record => {
-			let { dispatch } = this.props;
-			dispatch(Actions.widgets.newWidget({ type: "WeatherWidget" }))
-		};
-		
-		render() {
-			let { dispatch, editable } = this.props,
-			    {}                     = this.state;
-			return <div className={"ToolBar"}>
-				<>
-					<Fab aria-label="new" size={"small"} color={"secondary"}
-					     onClick={this.newWidget}>
-						<CreateIcon/>
-					</Fab>&nbsp;&nbsp;
-					<Fab aria-label="SaveState" size={"small"} color={"secondary"}
-					     onClick={e => dispatch(Actions.appState.saveState())}>
-						<SaveIcon/>
-					</Fab>
-				</>
-			</div>
-		}
+		return <React.Fragment>
+			{
+				Object.keys(widgets.items).map(
+					wid => {
+						let WidgetComp = allWidgets[widgets.items[wid].type];
+						return <Widget
+							key={wid}
+							record={widgets.items[wid]}
+							onSelect={this.selectWidget}
+							onWidgetUpdated={this.updateWidget}
+							selected={wid === widgets.selectedWidgetId}>
+							{WidgetComp && <WidgetComp id={wid}
+							                           onClose={this.rmWidget}></WidgetComp>}
+						</Widget>
+					}
+				)
+			}
+		</React.Fragment>
 	}
-)
+}

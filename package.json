@@ -10,6 +10,7 @@
     "dev-api": "wpi :api -w",
     "start-dev": "wpi :api&concurrently \"wpi-dev-server :devClient --hot --host 0.0.0.0\" \"wpi :api -w\" \"sleep 3&&nodemon --watch ./dist/App.server.js --inspect=[::]:9229 ./dist/App.server.js  -p 9701\"",
     "start": "node ./dist/App.server.js  -p 8080",
+    "test": "mocha --compilers js:@babel/register ./tests/*.test.jsx -b",
     "runBrowser": "start http://localhost:8080"
   },
   "dependencies": {
@@ -39,7 +40,13 @@
     "url-loader": "^1.1.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "fast-glob": "^2.2.6",
+    "jsdom": "^15.1.1",
+    "mocha": "^3.5.3",
     "wpi-react-redux-sass-ssr": "^1.2.0",
-    "webpack-inherit": "^1.5.11"
+    "webpack-inherit": "^1.6.2"
   }
 }

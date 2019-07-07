@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,60 +12,39 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+import typeReducers                                                     from './(*)/reducers.js';
+import {SELECTED_WIDGET_CHANGED, WIDGET_CHANGED, WIDGET_NEW, WIDGET_RM} from './actions';
 
-.WeatherWidget {
-  line-height: 1;
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0;
-  font-size: 22px;
-  display: inline-block;
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
-
-  .edit {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    display: none;
-  }
-
-  .delete {
-    position: absolute;
-    top: 75px;
-    right: 5px;
-    display: none;
-  }
-
-  &:hover .edit,
-  &:hover .delete {
-    display: block;
-  }
-
-
-  .search {
-    input {
-      position: absolute;
-      top: 5px;
-      width: calc(100% - 20px);
-      height: 25px;
-      font-size: 22px;
-      text-align: center;
-      left: 10px;
-      z-index: 10;
-      border-radius: 15px;
-    }
-  }
-
-  .save {
-
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-  }
+export default function widgets( state = { items: {} }, action ) {
+	switch ( action.type ) {
+		case SELECTED_WIDGET_CHANGED:
+			return {
+				...state,
+				selectedWidgetId: action.wid
+			};
+		case WIDGET_CHANGED:
+			let lastWState = state.items[action.record._id];
+			
+			return {
+				...state,
+				items: {
+					...state.items,
+					[action.record._id]: typeReducers[lastWState.type](lastWState, action)
+				}
+			}
+		case WIDGET_NEW:
+			return {
+				...state,
+				items: {
+					...state.items,
+					[action.record._id]: action.record
+				}
+			}
+		case WIDGET_RM:
+			let newState = { ...state, items: { ...state.items } };
+			delete newState.items[action.wid];
+			return newState;
+		default:
+			return state
+	}
 }

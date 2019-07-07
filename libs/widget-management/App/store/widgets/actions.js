@@ -1,4 +1,4 @@
-/*!
+/*
  * The MIT License (MIT)
  * Copyright (c) 2019. Wise Wild Web
  *
@@ -12,60 +12,47 @@
  *  @contact : n8tz.js@gmail.com
  */
 
+import shortid from "shortid";
 
-.WeatherWidget {
-  line-height: 1;
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0;
-  font-size: 22px;
-  display: inline-block;
-  border: 1px solid #E8E8E8;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
+export const WIDGET_CHANGED          = 'WIDGET_CHANGED';
+export const WIDGET_NEW              = 'WIDGET_NEW';
+export const WIDGET_RM               = 'WIDGET_RM';
+export const SELECTED_WIDGET_CHANGED = 'SELECTED_WIDGET_CHANGED';
 
-  .edit {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    display: none;
-  }
+export *                                                     from './(*)/actions.js';
 
-  .delete {
-    position: absolute;
-    top: 75px;
-    right: 5px;
-    display: none;
-  }
+export function selectWidget( wid ) {
+	return {
+		type: SELECTED_WIDGET_CHANGED,
+		wid
+	}
+}
 
-  &:hover .edit,
-  &:hover .delete {
-    display: block;
-  }
+export function newWidget( record ) {
+	return {
+		type  : WIDGET_NEW,
+		record: {
+			_id     : shortid.generate(),
+			size    : { width: 350, height: 400 },
+			position: {
+				x: 100 + ~~(Math.random() * 600),
+				y: 100 + ~~(Math.random() * 600)
+			},
+			...record
+		}
+	}
+}
 
+export function updateWidget( record ) {
+	return {
+		type: WIDGET_CHANGED,
+		record
+	}
+}
 
-  .search {
-    input {
-      position: absolute;
-      top: 5px;
-      width: calc(100% - 20px);
-      height: 25px;
-      font-size: 22px;
-      text-align: center;
-      left: 10px;
-      z-index: 10;
-      border-radius: 15px;
-    }
-  }
-
-  .save {
-
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-  }
+export function rmWidget( wid ) {
+	return {
+		type: WIDGET_RM,
+		wid
+	}
 }
